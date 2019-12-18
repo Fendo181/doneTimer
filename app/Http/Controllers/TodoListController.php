@@ -7,6 +7,9 @@ use App\Http\Requests\TodoListRequest;
 
 class TodoListController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $todoLists = TodoList::All();
@@ -18,6 +21,10 @@ class TodoListController extends Controller
             ]);
     }
 
+    /**
+     * @param TodoListRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function create(TodoListRequest $request)
     {
         $todoList = new TodoList();
@@ -28,6 +35,10 @@ class TodoListController extends Controller
         return redirect('/');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete($id)
     {
         $user = TodoList::find($id);
@@ -35,6 +46,10 @@ class TodoListController extends Controller
         return redirect('/');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $todoList = TodoList::findOrFail($id);
