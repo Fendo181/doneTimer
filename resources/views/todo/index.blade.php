@@ -1,8 +1,19 @@
 @extends('default')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 @section('content')
     <img src="{{asset('/img/DoneTimer.png')}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image" width="300" height="300">
     <form class="form-inline" action="/create" method="post">
+        @csrf
         <div class="mx-auto">
             <select class="form-control" name="category" id="category">
                 <option value="research">調査</option>
@@ -13,7 +24,7 @@
                 <option value="others">そのほか</option>
             </select>
             <label class="sr-only" for="description">todo</label>
-            <input type="text" class="form-control" id="description" size="60" placeholder="今やる事">
+            <input type="text" class="form-control" id="description" name="description" size="60" placeholder="今やる事">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
