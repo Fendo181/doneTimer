@@ -11,9 +11,7 @@
 |
 */
 
-use App\TodoList;
+Route::get('/','TodoListController@index');
+Route::post('/create','TodoListController@create');
 
-Route::get('/', function () {
-    $todoList =  TodoList::all()->where('done',1);
-    return view('todo.index',['todoList' => $todoList]);
-});
+
