@@ -16,9 +16,9 @@ class CreateTodolistsTable extends Migration
         Schema::create('todo_lists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('description');
-            $table->text('color');
-            $table->boolean('done')->default(0);
-            $table->integer('pomodoro_count')->default(0)->unsigned();
+            $table->text('color')->nullable();
+            $table->boolean('done')->default(0)->nullable();
+            $table->integer('pomodoro_count')->default(0)->unsigned()->nullable();
             $table->dateTime('started_at')->nullable();
             $table->dateTime('finished_at')->nullable();
             $table->timestamps();
