@@ -14,5 +14,7 @@
 Route::get('/','TodoListController@index');
 Route::post('/create','TodoListController@create');
 Route::delete('/delete/{id}/','TodoListController@delete');
+Route::PUT('/edit/{id}/','TodoListController@edit');
+Route::PUT('/update/{id}/','TodoListController@update');
 
 

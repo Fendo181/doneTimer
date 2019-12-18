@@ -69,12 +69,18 @@
                                 <i class="fa fa-pencil-square-o"></i>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="/edit">編集</a>
+
+                                <form method="post" action="/edit/{{ $todoList->id }}" id="edit_todo_form">
+                                    @csrf
+                                    <a class="dropdown-item" id='edit_todo' href="#">編集</a>
+                                    @method('PUT')
+                                </form>
+
 
                                 <form method="post" action="/delete/{{ $todoList->id }}" id="delete_todo_form">
                                     @csrf
                                     <a class="dropdown-item" id='delete_todo' href="#">削除</a>
-                                    @method('delete')
+                                    @method('DELETE')
                                 </form>
                             </div>
                         </div>

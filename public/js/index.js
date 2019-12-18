@@ -7,4 +7,12 @@ $("#delete_todo").click(function(){
     }
 });
 
+$("#edit_todo").click(function(){
+    if(confirm("編集しますか？")){
+        document.getElementById('edit_todo_form').submit()
+    }else{
+        return false;
+    }
+});
+
 
