@@ -13,8 +13,8 @@ class TodoListController extends Controller
 
         return view('todo.index',
             [
-            'todoLists' => $todoLists->where('done',0),
-            'doneLists' => $todoLists->where('done',1)
+                'todoLists' => $todoLists->where('done', 0),
+                'doneLists' => $todoLists->where('done', 1)
             ]);
     }
 
@@ -22,7 +22,7 @@ class TodoListController extends Controller
     {
         $todoList = new TodoList();
         $todoList->description = $request->description;
-        $todoList->category =  $request->category;
+        $todoList->category = $request->category;
         $todoList->color = $todoList->toCategoryColor($request->category);
         $todoList->save();
         return redirect('/');
@@ -32,6 +32,29 @@ class TodoListController extends Controller
     {
         $user = TodoList::find($id);
         $user->delete();
+        return redirect('/');
+    }
+
+    public function edit($id)
+    {
+        $todoList = TodoList::findOrFail($id);
+        return view('todo.edit')->with('todoList', $todoList);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param TodoListRequest $
+     * @param $id
+     */
+    public function update(TodoListRequest $request, $id)
+    {
+        $todoList = TodoList::findOrFail($id);
+
+        $todoList->description = $request->description;
+        $todoList->category = $request->category;
+        $todoList->color = $todoList->toCategoryColor($request->category);
+        $todoList->save();
         return redirect('/');
     }
 
