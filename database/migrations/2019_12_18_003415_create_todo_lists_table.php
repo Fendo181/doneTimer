@@ -16,6 +16,7 @@ class CreateTodolistsTable extends Migration
         Schema::create('todo_lists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('description');
+            $table->text('category');
             $table->text('color')->nullable();
             $table->boolean('done')->default(0)->nullable();
             $table->integer('pomodoro_count')->default(0)->unsigned()->nullable();
@@ -32,6 +33,6 @@ class CreateTodolistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todolists');
+        Schema::dropIfExists('todo_lists');
     }
 }
