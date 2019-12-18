@@ -9,7 +9,13 @@ class TodoListController extends Controller
 {
     public function index()
     {
-        return view('todo.index');
+        $todoLists = TodoList::All();
+
+        return view('todo.index',
+            [
+            'todoLists' => $todoLists->where('done',0),
+            'doneLists' => $todoLists->where('done',1)
+            ]);
     }
 
     public function create(TodoListRequest $request)
