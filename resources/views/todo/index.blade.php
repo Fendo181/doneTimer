@@ -55,7 +55,7 @@
                     <form id="update_done_form" method="post" action="/update_done/{{ $todoList->id }}">
                         @csrf
                         @method('PUT')
-                    <td><input id="js-update_done" type="checkbox" checked="{{ $todoList->done }}" onchange="updateDone()"></td>
+                    <td><input id="js-update_done" type="checkbox"  onchange="updateDone()"></td>
                     </form>
 
                     <td>{{ $todoList->category }}</td>
@@ -67,7 +67,6 @@
                         <span id="deadline_finished_at"></span>
                     </td>
                     <td>
-
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -121,6 +120,29 @@
                     <td>{{ $doneList->description }}</td>
                     <td>{{ $doneList->started_at }}</td>
                     <td>{{ $doneList->finished_at }}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                <form method="post" action="/edit/{{ $doneList->id }}" id="edit_todo_form">
+                                    @csrf
+                                    <a class="dropdown-item" id='js-edit_todo' href="#">編集</a>
+                                    @method('PUT')
+                                </form>
+
+
+                                <form method="post" action="/delete/{{ $doneList->id }}" id="delete_todo_form">
+                                    @csrf
+                                    <a class="dropdown-item" id='js-delete_todo' href="#">削除</a>
+                                    @method('DELETE')
+                                </form>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
