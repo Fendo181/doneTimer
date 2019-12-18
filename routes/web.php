@@ -11,6 +11,9 @@
 |
 */
 
+use App\TodoList;
+
 Route::get('/', function () {
-    return view('todo.index');
+    $todoList =  TodoList::all()->where('done',1);
+    return view('todo.index',['todoList' => $todoList]);
 });
