@@ -13,7 +13,8 @@ class TodoListRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // 認証処理は必要ない為
+        return true;
     }
 
     /**
