@@ -11,10 +11,11 @@
 @endif
 
 @section('content')
-    <img src="{{asset('/img/DoneTimer.png')}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image" width="300" height="300">
+    <img src="{{asset('/img/DoneTimer.png')}}" class="img-fluid rounded mx-auto d-block" alt="Responsive image"
+         width="300" height="300">
     <form class="form-inline" action="/create" method="post">
         @csrf
-        <div class="mx-auto">
+        <div class="col-md-auto mx-auto">
             <select class="form-control" name="category" id="category">
                 <option value="research">調査</option>
                 <option value="system_design">システム設計</option>
@@ -24,8 +25,94 @@
                 <option value="others">そのほか</option>
             </select>
             <label class="sr-only" for="description">todo</label>
-            <input type="text" class="form-control" id="description" name="description" size="60" placeholder="今やる事">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="text" class="form-control" id="description" name="description" size="60"
+                   placeholder="今やる事">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-plus-circle"></i>
+            </button>
         </div>
     </form>
+
+    <div class="row">
+        <h3>Todoリスト</h3>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Done</th>
+                <th scope="col">カテゴリー名</th>
+                <th scope="col">タスク</th>
+                <th scope="col">開始時刻</th>
+                <th scope="col">Doneまでの時刻</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach ($todoLists as $todoList)
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ $todoList->category }}</td>
+                    <td>{{ $todoList->description }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" id="started_time">開始する</button>
+                    </td>
+                    <td>
+                        <span id="deadline_finished_at"></span>
+                    </td>
+                    <td>
+
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/edit">編集</a>
+
+                                <form method="post" action="/delete/{{ $todoList->id }}" id="delete_todo_form">
+                                    @csrf
+                                    <a class="dropdown-item" id='delete_todo' href="#">削除</a>
+                                    @method('delete')
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <h3>Doneリスト</h3>
+    </div>
+
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">カテゴリー名</th>
+                <th scope="col">今やる事</th>
+                <th scope="col">開始時刻</th>
+                <th scope="col">Doneした時刻</th>
+                <th scope="col">Doneまでにかかった時間</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach ($doneLists as $doneList)
+                <tr>
+                    <td>{{  $doneLists->category }}</td>
+                    <td>{{ $doneList->description }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
+
+    {{--  Done一覧  --}}
+
 @endsection
