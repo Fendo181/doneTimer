@@ -83,4 +83,13 @@ class TodoListController extends Controller
         return redirect('/');
     }
 
+    public function startedTimer($id)
+    {
+        $todoList = TodoList::findOrFail($id);
+        $todoList->started_at = Carbon::now('Asia/tokyo')->format('Y-m-d H:i');
+        $todoList->finished_at = Carbon::now('Asia/tokyo')->addMinutes('25')->format('Y-m-d H:i:s');
+        $todoList->save();
+        return redirect('/');
+    }
+
 }

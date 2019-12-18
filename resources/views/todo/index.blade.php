@@ -61,10 +61,20 @@
                     <td>{{ $todoList->category }}</td>
                     <td>{{ $todoList->description }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary" id="started_time">開始する</button>
+                        @if (is_null($todoList->started_at))
+                            <form id="started_at_form" method="post" action="/started/{{ $todoList->id }}">
+                                @csrf
+                                @method('PUT')
+                            <button type="button" class="btn btn-primary" id="js-started_at">開始する</button>
+                            </form>
+                        @else
+                            {{ $todoList->started_at }}
+                        @endif
                     </td>
                     <td>
-                        <span id="deadline_finished_at"></span>
+                        @if (!is_null($todoList->finished_at))
+                            <span id="deadline_finished_at">{{ $todoList->finished_at }}</span>
+                        @endif
                     </td>
                     <td>
                         <div class="dropdown">

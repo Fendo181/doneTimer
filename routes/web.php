@@ -20,4 +20,6 @@ Route::PUT('/update/{id}/','TodoListController@update');
 // doneをupdateした際の処理
 Route::PUT('/update_done/{id}/','TodoListController@updateDone');
 
+// タスクの計測を始めた際の処理
+Route::PUT('/started/{id}/','TodoListController@startedTimer');
 
