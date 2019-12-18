@@ -16,4 +16,10 @@ $("#js-edit_todo").click(function(){
     }
 });
 
+function updateDone() {
+    if (document.getElementById("js-update_done").checked) {
+        document.getElementById('update_done_form').submit()
+    }
+}
+
 

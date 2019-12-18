@@ -52,7 +52,12 @@
 
             @foreach ($todoLists as $todoList)
                 <tr>
-                    <td><input type="checkbox"></td>
+                    <form id="update_done_form" method="post" action="/update_done/{{ $todoList->id }}">
+                        @csrf
+                        @method('PUT')
+                    <td><input id="js-update_done" type="checkbox" checked="{{ $todoList->done }}" onchange="updateDone()"></td>
+                    </form>
+
                     <td>{{ $todoList->category }}</td>
                     <td>{{ $todoList->description }}</td>
                     <td>
@@ -72,14 +77,14 @@
 
                                 <form method="post" action="/edit/{{ $todoList->id }}" id="edit_todo_form">
                                     @csrf
-                                    <a class="dropdown-item" id='edit_todo' href="#">編集</a>
+                                    <a class="dropdown-item" id='js-edit_todo' href="#">編集</a>
                                     @method('PUT')
                                 </form>
 
 
                                 <form method="post" action="/delete/{{ $todoList->id }}" id="delete_todo_form">
                                     @csrf
-                                    <a class="dropdown-item" id='delete_todo' href="#">削除</a>
+                                    <a class="dropdown-item" id='js-delete_todo' href="#">削除</a>
                                     @method('DELETE')
                                 </form>
                             </div>
@@ -99,6 +104,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th scope="col">Done</th>
                 <th scope="col">カテゴリー名</th>
                 <th scope="col">今やる事</th>
                 <th scope="col">開始時刻</th>
@@ -110,8 +116,11 @@
 
             @foreach ($doneLists as $doneList)
                 <tr>
-                    <td>{{  $doneLists->category }}</td>
+                    <td><input id="js-update_done" type="checkbox" checked="{{ $doneList->done }}"></td>
+                    <td>{{ $doneList->category }}</td>
                     <td>{{ $doneList->description }}</td>
+                    <td>{{ $doneList->started_at }}</td>
+                    <td>{{ $doneList->finished_at }}</td>
                 </tr>
             @endforeach
             </tbody>
