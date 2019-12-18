@@ -78,7 +78,7 @@ class TodoListController extends Controller
     {
         $todoList = TodoList::findOrFail($id);
         $todoList->done = 1;
-        $todoList->finished_at =  Carbon::now('Asia/tokyo')->format('Y-m-d H:i');
+        $todoList->finished_at = Carbon::now('Asia/tokyo')->format('Y-m-d H:i');
         $todoList->save();
         return redirect('/');
     }
