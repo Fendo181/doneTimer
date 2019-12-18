@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class CreateTodoListTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      */
@@ -15,5 +17,21 @@ class CreateTodoListTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    function create_new_todo_list_when_valid_params()
+    {
+        $response = $this->post('/create', [
+            'category' => 'others',
+            'description' => 'Buy Apple',
+        ]);
+
+
+        $this->assertDatabaseHas('todo_lists', [
+            'description' => 'Buy Apple'
+        ]);
     }
 }
