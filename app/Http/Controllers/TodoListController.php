@@ -28,4 +28,11 @@ class TodoListController extends Controller
         return redirect('/');
     }
 
+    public function delete($id)
+    {
+        $user = TodoList::find($id);
+        $user->delete();
+        return redirect('/');
+    }
+
 }
