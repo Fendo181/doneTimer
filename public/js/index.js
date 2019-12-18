@@ -8,6 +8,7 @@ $("#js-delete_todo").click(function(){
 });
 
 
+// 編集時
 $("#js-edit_todo").click(function(){
     if(confirm("編集しますか？")){
         document.getElementById('edit_todo_form').submit()
@@ -16,6 +17,7 @@ $("#js-edit_todo").click(function(){
     }
 });
 
+// doneフラグを更新時
 function updateDone() {
     if (document.getElementById("js-update_done").checked) {
         document.getElementById('update_done_form').submit()

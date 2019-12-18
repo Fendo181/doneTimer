@@ -148,8 +148,4 @@
             </tbody>
         </table>
     </div>
-
-
-    {{--  Done一覧  --}}
-
 @endsection
