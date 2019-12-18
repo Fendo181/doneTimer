@@ -44,7 +44,6 @@
                 <th scope="col">カテゴリー名</th>
                 <th scope="col">タスク</th>
                 <th scope="col">開始時刻</th>
-                <th scope="col">Doneまでの時刻</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -55,25 +54,21 @@
                     <form id="update_done_form" method="post" action="/update_done/{{ $todoList->id }}">
                         @csrf
                         @method('PUT')
-                    <td><input id="js-update_done" type="checkbox"  onchange="updateDone()"></td>
+                        <td><input id="js-update_done" type="checkbox" onchange="updateDone()"></td>
                     </form>
 
                     <td>{{ $todoList->category }}</td>
                     <td>{{ $todoList->description }}</td>
                     <td>
                         @if (is_null($todoList->started_at))
+                            {{ $todoList->started_at }}
                             <form id="started_at_form" method="post" action="/started/{{ $todoList->id }}">
                                 @csrf
                                 @method('PUT')
-                            <button type="button" class="btn btn-primary" id="js-started_at">開始する</button>
+                                <button type="button" class="btn btn-primary" id="js-started_at">開始する</button>
                             </form>
                         @else
                             {{ $todoList->started_at }}
-                        @endif
-                    </td>
-                    <td>
-                        @if (!is_null($todoList->finished_at))
-                            <span id="deadline_finished_at">{{ $todoList->finished_at }}</span>
                         @endif
                     </td>
                     <td>
@@ -118,7 +113,7 @@
                 <th scope="col">今やる事</th>
                 <th scope="col">開始時刻</th>
                 <th scope="col">Doneした時刻</th>
-                <th scope="col">Doneまでにかかった時間</th>
+                <th scope="col">Doneまでにかかった時間(分)</th>
             </tr>
             </thead>
             <tbody>
@@ -130,6 +125,7 @@
                     <td>{{ $doneList->description }}</td>
                     <td>{{ $doneList->started_at }}</td>
                     <td>{{ $doneList->finished_at }}</td>
+                    <td>{{ $doneList->elapsed_time }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"

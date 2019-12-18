@@ -22,6 +22,7 @@ class CreateTodolistsTable extends Migration
             $table->integer('pomodoro_count')->default(0)->unsigned()->nullable();
             $table->dateTime('started_at')->nullable();
             $table->dateTime('finished_at')->nullable();
+            $table->text('elapsed_time')->nullable();
             $table->timestamps();
         });
     }

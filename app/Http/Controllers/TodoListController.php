@@ -33,6 +33,7 @@ class TodoListController extends Controller
         $todoList->category = $request->category;
         $todoList->color = $todoList->toCategoryColor($request->category);
         $todoList->save();
+
         return redirect('/');
     }
 
@@ -71,6 +72,16 @@ class TodoListController extends Controller
         $todoList->category = $request->category;
         $todoList->color = $todoList->toCategoryColor($request->category);
         $todoList->save();
+
+        return redirect('/');
+    }
+
+
+    public function startedTimer($id)
+    {
+        $todoList = TodoList::findOrFail($id);
+        $todoList->started_at = Carbon::now('Asia/tokyo')->format('Y-m-d H:i:s');
+        $todoList->save();
         return redirect('/');
     }
 
@@ -78,18 +89,14 @@ class TodoListController extends Controller
     {
         $todoList = TodoList::findOrFail($id);
         $todoList->done = 1;
-        $todoList->finished_at = Carbon::now('Asia/tokyo')->format('Y-m-d H:i');
+        $todoList->finished_at = Carbon::now('Asia/tokyo')->format('Y-m-d H:i:s');
+
+        // タスクにかかった時間を計測する
+        $startedTime = Carbon::make($todoList->started_at);
+        $finishedTime = Carbon::make($todoList->finished_at);
+        $todoList->elapsed_time = $startedTime->diffInMinutes($finishedTime);
         $todoList->save();
+
         return redirect('/');
     }
-
-    public function startedTimer($id)
-    {
-        $todoList = TodoList::findOrFail($id);
-        $todoList->started_at = Carbon::now('Asia/tokyo')->format('Y-m-d H:i');
-        $todoList->finished_at = Carbon::now('Asia/tokyo')->addMinutes('25')->format('Y-m-d H:i:s');
-        $todoList->save();
-        return redirect('/');
-    }
-
 }
