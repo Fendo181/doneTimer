@@ -16,6 +16,8 @@ class TodoListController extends Controller
     {
         $todoList = new TodoList();
         $todoList->description = $request->description;
+        $todoList->category =  $request->category;
+        $todoList->color = $todoList->toCategoryColor($request->category);
         $todoList->save();
         return redirect('/');
     }
