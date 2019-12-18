@@ -24,7 +24,8 @@ class TodoListRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'category' => 'required',
+            'description' => 'required|max:255',
         ];
     }
 }
