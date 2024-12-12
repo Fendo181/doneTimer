@@ -121,7 +121,7 @@
             @foreach ($doneLists as $doneList)
                 <tr>
                     <td><input id="js-update_done" type="checkbox" checked="{{ $doneList->done }}"></td>
-                    <td><span style="background-color:{{ $todoList->color }}">{{ $doneList->category }}</span></td>
+                    <td><span style="background-color:{{ $doneList->color }}">{{ $doneList->category }}</span></td>
                     <td>{{ $doneList->description }}</td>
                     <td>{{ $doneList->started_at }}</td>
                     <td>{{ $doneList->finished_at }}</td>
